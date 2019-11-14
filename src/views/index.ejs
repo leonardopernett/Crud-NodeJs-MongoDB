@@ -1,0 +1,69 @@
+<% include partials/head.ejs %>
+
+   <div class="container mt-5">
+       <div class="row">
+           <div class="col-md-5">
+               <div class="card">
+                  <div class="card-header">
+                    Create task
+                  </div>
+                   <div class="card-body">
+                       <form action="/save" method="post">
+                        
+                        <div class="form-group">
+                            <input type="text" name="title" placeholder="insert title" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                              <textarea name="description"  rows="3" class="form-control" placeholder="insert description"></textarea>
+                        </div>
+                         <button type="submit" class="btn btn-primary btn-block">Add Task</button>
+                       </form>
+                   </div>
+               </div>
+           </div>
+
+           <div class="col-md-7">
+                <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">title</th>
+                            <th scope="col">description</th>
+                            <th scope="col">Operacion</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          
+                          <% for (let i = 0; i < data.length; i++) { %>
+                            
+                          <tr>
+                            <th scope="row"><%= (i + 1) %></th>
+                            <td><%= data[i].title %> </td>
+                            <td><%= data[i].description %> </td>
+                            <td>
+                      
+                             <a href="/done/<%=data[i]._id%>" class="btn <%= data[i].status ? 'btn-success':'btn-dark' %>">done</a>  
+                        
+                            </td>
+
+                            <td>
+                         
+                                <a href="/delete/<%=data[i].id%>" class="btn btn-danger">Delete</a>  
+                            </td>
+
+                            <td>
+                                <a href="/edit/<%=data[i].id%>" class="btn btn-warning">edit</a>  
+                            </td>
+      
+                          </tr>
+                          <% }%>
+                          </tr>
+                        </tbody>
+                      </table>
+           </div>
+       </div>
+   </div>
+
+
+<% include partials/footer.ejs %>
